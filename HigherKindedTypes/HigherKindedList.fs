@@ -8,22 +8,23 @@ namespace HigherKindedTypes
 /// <c>Functor</c> interface).
 /// </summary>
 type List private () = 
-  static member ToHigherKindedType (x : 'a list) = HigherKindedType<List, 'a> (x, new List())
-  static member FromHigherKindedType (x : HigherKindedType<List, 'a>) = x.Value :?> 'a list
+  static member toHigherKindedType (x : 'a list) = HigherKindedType<List, 'a> (x, new List())
+  static member fromHigherKindedType (x : HigherKindedType<List, 'a>) = x.Value :?> 'a list
+
 
   interface Functor<List> with
     member this.Map (f : 'a -> 'b) (x : HigherKindedType<List, 'a>) =
-      List.map f (List.FromHigherKindedType x) |> List.ToHigherKindedType
+      List.map f (List.fromHigherKindedType x) |> List.toHigherKindedType
 
   interface Collection<List> with
     member this.Zip (left : HigherKindedType<List, 'a>) (right : HigherKindedType<List, 'b>) =
-      List.zip (List.FromHigherKindedType left) (List.FromHigherKindedType right) 
-      |> List.ToHigherKindedType
+      List.zip (List.fromHigherKindedType left) (List.fromHigherKindedType right) 
+      |> List.toHigherKindedType
 
     member this.Filter (predicate : 'a -> bool) (xs : HigherKindedType<List, 'a>) =
-      List.filter predicate (List.FromHigherKindedType xs) |> List.ToHigherKindedType
+      List.filter predicate (List.fromHigherKindedType xs) |> List.toHigherKindedType
 
 [<AutoOpen>]
 module ListActivePatterns = 
-  let (|HigherKindedList|) (x:HigherKindedType<List, 'a>) = List.FromHigherKindedType x
-  let (|LowerKindedList|) (x:'a list) = List.ToHigherKindedType x
+  let (|HigherKindedList|) (x:HigherKindedType<List, 'a>) = List.fromHigherKindedType x
+  let (|LowerKindedList|) (x:'a list) = List.toHigherKindedType x

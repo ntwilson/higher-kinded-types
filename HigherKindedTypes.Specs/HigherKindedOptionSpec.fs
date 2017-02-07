@@ -11,18 +11,18 @@ module HigherKindedListSpec =
   let ``can switch between normal types and higher kinded types`` () =
     let a = Some 1
 
-    let a' = Option.ToHigherKindedType a
+    let a' = Option.toHigherKindedType a
 
     let shouldBeOfHigherKindedType (x : HigherKindedType<'M, 'a>) = ()
 
     a' |> shouldBeOfHigherKindedType
 
-    Option.FromHigherKindedType a'
+    Option.fromHigherKindedType a'
     |> shouldBe a
 
   [<Test>]
   let ``is a functor`` () =
-    Some 1 |> Option.ToHigherKindedType
+    Some 1 |> Option.toHigherKindedType
     |> Functor.map ((+) 5)
-    |> Option.FromHigherKindedType
+    |> Option.fromHigherKindedType
     |> shouldBe (Some 6)

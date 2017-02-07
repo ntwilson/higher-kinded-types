@@ -10,7 +10,8 @@
         "Functor.fs",
         "Collection.fs",
         "HigherKindedOption.fs",
-        "HigherKindedList.fs"
+        "HigherKindedList.fs",
+        "HigherKindedArray.fs"
       ]
     }
   },

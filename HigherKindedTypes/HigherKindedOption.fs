@@ -8,9 +8,9 @@ namespace HigherKindedTypes
 /// <c>Functor</c> interface).
 /// </summary>
 type Option private () = 
-  static member ToHigherKindedType (x : 'a option) = HigherKindedType<Option, 'a> (x, new Option())
-  static member FromHigherKindedType (x : HigherKindedType<Option, 'a>) = x.Value :?> 'a option
+  static member toHigherKindedType (x : 'a option) = HigherKindedType<Option, 'a> (x, new Option())
+  static member fromHigherKindedType (x : HigherKindedType<Option, 'a>) = x.Value :?> 'a option
 
   interface Functor<Option> with 
     member this.Map (f : 'a -> 'b) (x : HigherKindedType<Option, 'a>) = 
-      Option.map f (Option.FromHigherKindedType x) |> Option.ToHigherKindedType
+      Option.map f (Option.fromHigherKindedType x) |> Option.toHigherKindedType

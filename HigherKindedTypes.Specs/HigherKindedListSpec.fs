@@ -10,19 +10,19 @@ module ListSpec =
   [<Test>]
   let ``can switch between normal and higher kinded type`` () =
     let a = [1]
-    let a' = List.ToHigherKindedType a
+    let a' = List.toHigherKindedType a
 
     let shouldBeOfHigherKindedTypeAndConvertable (x : HigherKindedType<List, 'a>) = 
-        x |> List.FromHigherKindedType
+        x |> List.fromHigherKindedType
         |> shouldBe a
 
     a' |> shouldBeOfHigherKindedTypeAndConvertable
 
   [<Test>]
   let ``is a functor`` () =
-    [1] |> List.ToHigherKindedType
+    [1] |> List.toHigherKindedType
     |> Functor.map ((+) 5)
-    |> List.FromHigherKindedType
+    |> List.fromHigherKindedType
     |> shouldBe [6]
 
   [<Test>]
@@ -42,8 +42,8 @@ module ListSpec =
       |> Collection.filter (fun (left, right) -> left <= 5)
       |> Functor.map (fun (left, right) -> (left + 5, right - 5))
     
-    List.ToHigherKindedType [ 1 .. 10 ]
+    List.toHigherKindedType [ 1 .. 10 ]
     |> doCollectionOperations
-    |> List.FromHigherKindedType
+    |> List.fromHigherKindedType
     |> shouldBe 
         ([1 .. 5] |> List.map (fun x -> (x + 5, x - 5)))
