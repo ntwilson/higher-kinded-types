@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>HigherKindedTypes</id>
+    <version>0.0.1</version>
+    <authors>nathan wilson</authors>
+    <owners>nathan wilson</owners>
+    <projectUrl>https://github.com/ntwilson/higher-kinded-types</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Higher-kinded generic types for F#</description>
+    <releaseNotes>beta</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>higher-kinded-types higher-order-types higher kinded generic types</tags>
+  </metadata>
+</package>
